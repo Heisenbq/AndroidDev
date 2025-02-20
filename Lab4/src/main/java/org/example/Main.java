@@ -1,5 +1,6 @@
  package org.example;
 
+ import org.example.PaintApp.PaintFrame;
  import org.example.testCompacts.BoxLayoutTest;
  import org.example.testCompacts.GridLayoutTest;
 
@@ -8,7 +9,8 @@
 
  public class Main {
      public static void main(String[] args) {
-         new BoxLayoutTest();
+//         SwingUtilities.invokeLater(PaintFrame::new);
+         new PaintFrame();
      }
 
  }
