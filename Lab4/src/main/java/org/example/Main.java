@@ -8,19 +8,15 @@
          JFrame f = new JFrame();
          f.setSize(800, 300); // Размер окна
          f.setLocation(800, 300); // Расположение окна
-         f.setLayout(new FlowLayout()); // Использование FlowLayout для правильного расположения компонентов
 
-         JLabel lab1 = new JLabel("Some text1");
-         JLabel lab2 = new JLabel("Some text2");
+         JPanel panel = new JPanel(new FlowLayout());
 
-         f.add(lab1); // Добавить первый JLabel
-         f.add(lab2); // Добавить второй JLabel
 
-         JPanel p = new JPanel(); // Панель для кнопки
-         JButton button = new JButton("Button");
-         p.add(button); // Добавить кнопку на панель
-         f.add(p); // Добавить панель с кнопкой на окно
+         for (int i = 1; i < 20; i++) {
+             panel.add(new JButton("Button" + i));
+         }
 
+         f.add(panel);
          f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Закрытие окна при нажатии на крестик
          f.setVisible(true); // Сделать окно видимым
      }
