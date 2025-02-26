@@ -12,6 +12,7 @@ public class Rectangle extends Shape{
 
     public Rectangle(double a, double b, double c, double d, Color color, ArrayList<Double> placement) {
         super(color,placement);
+        if (!((a==c) && (b==d))) throw new RuntimeException("Not rectangle");
         this.a = a;
         this.b = b;
         this.c = c;

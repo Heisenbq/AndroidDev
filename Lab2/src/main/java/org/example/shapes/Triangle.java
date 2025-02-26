@@ -12,6 +12,7 @@ public class Triangle extends Shape{
 
     public Triangle(int a, int b, int c, Color color, ArrayList<Double> placement) {
         super(color,placement);
+        if (!((a+b>c) && (a+c>b) && (b+c>a))) throw new RuntimeException("Not exist Triangle");
         this.a = a;
         this.b = b;
         this.c = c;
