@@ -6,11 +6,13 @@ import java.util.Objects;
 
 public class Line extends Shape{
 
-    private double a;
+    private Double x2;
+    private Double y2;
 
-    public Line(double a, Color color, ArrayList<Double> placement) {
-        super(color,placement);
-        this.a = a;
+    public Line(Color color, double x1, double y1, double x2, double y2) {
+        super(color,x1,y1);
+        this.x2 = x2;
+        this.y2 = y2;
     }
 
     @Override
@@ -20,15 +22,15 @@ public class Line extends Shape{
 
     @Override
     public double perimeter() {
-        return a;
+        return Math.sqrt(Math.pow(x2 - this.x1, 2) + Math.pow(y2 - this.y1, 2));
     }
 
-    public double getA() {
-        return a;
+    public Double getX2() {
+        return x2;
     }
 
-    public void setA(double a) {
-        this.a = a;
+    public Double getY2() {
+        return y2;
     }
 
     @Override
@@ -36,18 +38,22 @@ public class Line extends Shape{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Line line = (Line) o;
-        return Double.compare(a, line.a) == 0;
+        return Objects.equals(x2, line.x2) && Objects.equals(y2, line.y2) && Objects.equals(x1, line.x1) && Objects.equals(y1, line.y1);
     }
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(a);
+        return Objects.hash(x1,y1,x2, y2);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\t\tLine{" +
-                "a=" + a +
+        return super.toString() + "\tLine{" +
+                "x2=" + x2 +
+                ", y2=" + y2 +
+                ", x1=" + x1 +
+                ", y1=" + y1 +
                 '}';
     }
 }
