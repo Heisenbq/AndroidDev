@@ -11,26 +11,32 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<AbstractShape> shapes = new ArrayList<>(Arrays.asList(
-                new Rectangle(4, 4, 4, 4, Color.BLACK, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Rectangle(3, 5, 3, 5, Color.RED, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Rectangle(8, 5, 8, 5, Color.GRAY, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Triangle(3, 4, 5, Color.GREEN, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Triangle(6, 8, 10, Color.BLUE, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Triangle(6, 6, 9, Color.YELLOW, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Circle(3, Color.WHITE, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Circle(5, Color.PINK, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Circle(12, Color.BLACK, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Line(1, Color.RED, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Line(3, Color.DARK_GRAY, new ArrayList<>(Arrays.asList(0.0, 0.0))),
-                new Line(6, Color.ORANGE, new ArrayList<>(Arrays.asList(0.0, 0.0)))
-        ));
+        AbstractShape[] shape = {
+                new Rectangle(Color.BLACK, 0,0,0,4,3,4,3,0),
+                new Rectangle(Color.BLACK, 0,0,0,5,4,5,4,0),
+                new Rectangle(Color.BLACK, 1,1,1,6,5,6,5,1),
+                new Triangle(Color.GREEN, 0,0,3,0,1,2),
+                new Triangle(Color.GREEN, -2,-3,2,-1,0,4),
+                new Triangle(Color.GREEN, 1,1,4,5,7,2),
+                new Circle(Color.WHITE, 0,0,3,4),
+                new Circle(Color.WHITE, 0,0,6,8),
+                new Circle(Color.WHITE, 0,0,5,5),
+                new Line(Color.RED,0,0,5,0),
+                new Line(Color.RED,0,0,0,10),
+                new Line(Color.cyan,0,0,6,8)
+        };
 
+        ArrayList<AbstractShape> shapes = new ArrayList<>();
+        for(AbstractShape sh: shape) {
+            if(!shapes.contains(sh)){
+                shapes.add(sh);
+            }
+        }
         AtomicInteger index = new AtomicInteger(0);
 
         shapes.stream().
-                forEach( shape -> {
-                    System.out.println("Iндекс: " + index.getAndIncrement() + "\t"+shape.toString());
+                forEach( example -> {
+                    System.out.println("Index: " + index.getAndIncrement() + "\t" + example.toString());
                 });
     }
 }

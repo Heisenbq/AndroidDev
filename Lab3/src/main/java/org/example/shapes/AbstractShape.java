@@ -2,33 +2,41 @@ package org.example.shapes;
 
 import java.awt.*;
 
-public abstract class AbstractShape implements Shape, Movable,Colorable {
+public abstract class AbstractShape implements Colorable, Movable,Shape{
 
     private Color color;
-    private java.util.List<Double> placement;
+    protected Double x1;
+    protected Double y1;
 
-    public AbstractShape(Color color, java.util.List<Double> placement) {
+    public AbstractShape(Color color, double x1, double y1) {
         this.color = color;
-        this.placement = placement;
+        this.x1 = x1;
+        this.y1 = y1;
     }
-    @Override
-    public void setColor(Color color) {
+    public AbstractShape() {
+    }
+    public abstract double square();
+    public abstract double perimeter();
+
+    public void fill(Color color) {
         this.color = color;
     };
 
-    @Override
     public Color getColor() {
         return color;
     }
 
-    @Override
-    public void move(Double x, Double y){
-        placement.set(0,placement.get(0) + x);
-        placement.set(1,placement.get(1) + y);
+    public void move(Double dx, Double dy){
+        this.x1 += dx;
+        this.y1 += dy;
     }
 
-    public java.util.List<Double> getPlacement() {
-        return placement;
+    public Double getX1() {
+        return x1;
+    }
+
+    public Double getY1() {
+        return y1;
     }
 
     @Override
@@ -36,3 +44,4 @@ public abstract class AbstractShape implements Shape, Movable,Colorable {
         return  "Площадь: "+ String.format("%.2f",square()) + "\tПериметр: " + String.format("%.2f",perimeter()) + "\tЦвет: " + getColor().toString();
     }
 }
+

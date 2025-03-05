@@ -5,51 +5,61 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Triangle extends AbstractShape {
-    private int a;
-    private int b;
-    private int c;
+public class Triangle extends AbstractShape{
+    private Double x2,y2,x3,y3;
 
-    public Triangle(int a, int b, int c, Color color, ArrayList<Double> placement) {
-        super(color,placement);
-        this.a = a;
-        this.b = b;
-        this.c = c;
+    public Triangle(Color color, double x1, double y1, double x2, double y2, double x3, double y3) {
+        super(color,x1,y1);
+        this.x2 = x2;
+        this.y2 = y2;
+        this.x3 = x3;
+        this.y3 = y3;
+        if (!((sideA()+sideB() > sideC()) && (sideA() + sideC() > sideB()) && (sideB() + sideC() > sideA()))) throw new RuntimeException("Not exist Triangle");
     }
 
+    private double sideA(){
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+    private double sideB(){
+        return Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
+    }
+    private double sideC(){
+        return Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
+    }
     @Override
     public double square() {
         double p = perimeter() / 2;
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        return Math.sqrt(p * (p - sideA()) * (p - sideB()) * (p - sideC()));
     }
 
     @Override
     public double perimeter() {
-        return a+b+c;
+        return sideA() + sideB() + sideC();
     }
 
-    public int getA() {
-        return a;
+    @Override
+    public void move(Double dx, Double dy) {
+        super.move(dx, dy);
+        this.x2 += dx;
+        this.y2 += dy;
+        this.x3 += dx;
+        this.y3 += dy;
     }
 
-    public void setA(int a) {
-        this.a = a;
+    public Double getX2() {
+        return x2;
     }
 
-    public int getB() {
-        return b;
+    public Double getY2() {
+        return y2;
     }
 
-    public void setB(int b) {
-        this.b = b;
+    public Double getX3() {
+        return x3;
     }
 
-    public int getC() {
-        return c;
-    }
-
-    public void setC(int c) {
-        this.c = c;
+    public Double getY3() {
+        return y3;
     }
 
     @Override
@@ -57,20 +67,23 @@ public class Triangle extends AbstractShape {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Triangle triangle = (Triangle) o;
-        return a == triangle.a && b == triangle.b && c == triangle.c;
+        return Objects.equals(x2, triangle.x2) && Objects.equals(y2, triangle.y2) && Objects.equals(x3, triangle.x3) && Objects.equals(y3, triangle.y3) && Objects.equals(x1, triangle.x1) && Objects.equals(y1, triangle.y1);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(a, b, c);
+        return Objects.hash(x2, y2, x3, y3,x1,y1);
     }
 
     @Override
     public String toString() {
         return super.toString() + "\t\tTriangle{" +
-                "a=" + a +
-                ", b=" + b +
-                ", c=" + c +
+                "x1=" + x1 +
+                ", y1=" + y1 +
+                ", x2=" + x2 +
+                ", y2=" + y2 +
+                ", x3=" + x3 +
+                ", y3=" + y3 +
                 '}';
     }
 }
